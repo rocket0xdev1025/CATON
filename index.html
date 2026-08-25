@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CATON | Solana’s Toughest Police Cat</title>
+  <meta name="description" content="CATON is Solana’s toughest police cat, patrolling the blockchain and chasing scams with style. Buy $CATON on Solana." />
+  <meta property="og:title" content="CATON | $CATON" />
+  <meta property="og:description" content="CATON is Solana’s toughest police cat, patrolling the blockchain and chasing scams with style." />
+  <meta property="og:image" content="banner.png" />
+  <meta name="theme-color" content="#0A1220" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=Black+Ops+One&family=Oswald:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: "#05080F",
+              900: "#0A1220",
+              850: "#0E1A2E",
+              800: "#122238",
+              700: "#1A3352",
+              600: "#27456B",
+            },
+            gold: {
+              200: "#F6E7A1",
+              300: "#F0D060",
+              400: "#E8C547",
+              500: "#C9A227",
+              600: "#A6851C",
+            },
+            baton: {
+              400: "#4ADE80",
+              500: "#2FA85A",
+              600: "#218A48",
+            },
+            siren: { red: "#E31C25", blue: "#1E6FFF" },
+            fur: { 400: "#D4A574", 500: "#C48A4A", 700: "#8B5A2B" },
+          },
+          fontFamily: {
+            display: ['"Black Ops One"', "cursive"],
+            oswald: ["Oswald", "sans-serif"],
+            mono: ['"Share Tech Mono"', "ui-monospace", "monospace"],
+            body: ["Barlow", "sans-serif"],
+            condensed: ['"Barlow Condensed"', "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --gold: #e8c547;
+      --navy: #0a1220;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Barlow, sans-serif;
+      background: #05080f;
+      color: #f4efe4;
+      overflow-x: hidden;
+    }
+    ::selection { background: #e8c547; color: #0a1220; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #05080f; }
+    ::-webkit-scrollbar-thumb { background: #c9a227; border-radius: 99px; }
+
+    .siren-bar {
+      height: 6px;
+      background: linear-gradient(90deg, #e31c25 0%, #e31c25 42%, #fff 50%, #1e6fff 58%, #1e6fff 100%);
+      background-size: 200% 100%;
+      animation: sirenSlide 1.15s linear infinite;
+      box-shadow: 0 0 18px #e31c25, 0 0 18px #1e6fff;
+    }
+    @keyframes sirenSlide {
+      0% { background-position: 0% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .hero-lights {
+      background:
+        radial-gradient(ellipse 55% 70% at 8% 0%, rgba(227, 28, 37, 0.38), transparent 60%),
+        radial-gradient(ellipse 55% 70% at 92% 0%, rgba(30, 111, 255, 0.38), transparent 60%);
+      animation: lightsSwap 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes lightsSwap {
+      0%, 100% { filter: hue-rotate(0deg); opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+
+    .grain::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 80;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    .tape {
+      height: 22px;
+      background: repeating-linear-gradient(
+        -45deg,
+        #111 0 14px,
+        #e8c547 14px 28px
+      );
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .crosswalk {
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0 28px,
+        rgba(255, 255, 255, 0.035) 28px 56px
+      );
+    }
+
+    .hud-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(16, 28, 48, 0.86), rgba(8, 14, 26, 0.92));
+      border: 1px solid rgba(232, 197, 71, 0.28);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .hud-card::before,
+    .hud-card::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #e8c547;
+      pointer-events: none;
+    }
+    .hud-card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+    .hud-card::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+    .gold-stroke {
+      -webkit-text-stroke: 1px rgba(232, 197, 71, 0.35);
+      text-shadow:
+        -3px 0 0 rgba(227, 28, 37, 0.45),
+        3px 0 0 rgba(30, 111, 255, 0.45),
+        0 8px 40px rgba(0, 0, 0, 0.6),
+        0 0 34px rgba(232, 197, 71, 0.25);
+    }
+
+    .siren-ring {
+      background: conic-gradient(#e31c25, #1e6fff, #e8c547, #e31c25);
+      animation: spin 4s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .stamp {
+      border: 3px solid #2fa85a;
+      color: #2fa85a;
+      transform: rotate(-12deg);
+      letter-spacing: 0.28em;
+      text-shadow: 0 0 12px rgba(47, 168, 90, 0.55);
+      box-shadow: 0 0 0 3px rgba(47, 168, 90, 0.15), inset 0 0 12px rgba(47, 168, 90, 0.12);
+    }
+
+    .btn-buy {
+      background: linear-gradient(180deg, #4ade80 0%, #2fa85a 42%, #1e7a40 100%);
+      box-shadow: 0 0 0 1px #86efac, 0 10px 30px rgba(47, 168, 90, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+    .btn-buy:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-chart {
+      background: linear-gradient(180deg, #f0d060 0%, #c9a227 50%, #8a7016 100%);
+      color: #1a1404;
+      box-shadow: 0 0 0 1px #f6e7a1, 0 10px 30px rgba(201, 162, 39, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    .btn-chart:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    .step-num {
+      background: radial-gradient(circle at 30% 20%, #f6e7a1, #c9a227 55%, #8a7016);
+      color: #1a1404;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .scanline {
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 2px,
+        rgba(0, 0, 0, 0.08) 2px 4px
+      );
+      pointer-events: none;
+    }
+
+    .nav-blur {
+      background: rgba(5, 8, 15, 0.72);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(232, 197, 71, 0.18);
+    }
+
+    .pulse-dot {
+      box-shadow: 0 0 0 0 rgba(47, 168, 90, 0.7);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 10px rgba(47, 168, 90, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(47, 168, 90, 0); }
+    }
+
+    #dexscreener-embed { position: relative; width: 100%; padding-bottom: 72%; min-height: 420px; }
+    #dexscreener-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    @media (max-width: 768px) {
+      #dexscreener-embed { padding-bottom: 140%; min-height: 520px; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: reveal 0.8s ease forwards;
+    }
+    @keyframes reveal { to { opacity: 1; transform: none; } }
+    .d1 { animation-delay: 0.1s; } .d2 { animation-delay: 0.2s; }
+    .d3 { animation-delay: 0.35s; } .d4 { animation-delay: 0.5s; }
+    .d5 { animation-delay: 0.65s; }
+
+    .bg-city {
+      background-image:
+        linear-gradient(180deg, rgba(5, 8, 15, 0.55), rgba(5, 8, 15, 0.88)),
+        url("bg-city.jpg");
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="grain bg-navy-950">
+  <div class="siren-bar fixed top-0 inset-x-0 z-[60]"></div>
+
+  <!-- NAV -->
+  <header class="nav-blur fixed top-[6px] inset-x-0 z-50">
+    <div class="max-w-7xl mx-auto px-3 sm:px-4 h-[72px] flex items-center justify-between gap-2 sm:gap-4">
+      <a href="#top" class="flex items-center gap-2 sm:gap-3 min-w-0 shrink">
+        <img src="logo.png" alt="CATON logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover object-center ring-2 ring-gold-400 shadow-[0_0_18px_rgba(232,197,71,0.45)] shrink-0" />
+        <div class="leading-none">
+          <div class="font-display text-lg sm:text-xl tracking-wide text-white">CATON</div>
+          <div class="font-mono text-[10px] text-gold-400 tracking-[0.28em]">CATON PD</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 font-condensed text-lg tracking-wide text-gold-200/80">
+        <a href="#about" class="hover:text-gold-300 transition">About</a>
+        <a href="#howto" class="hover:text-gold-300 transition">How to Buy</a>
+        <a href="#chart" class="hover:text-gold-300 transition">Chart</a>
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="https://t.me/CATON_pump" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden ring-1 ring-white/20 hover:scale-110 transition shrink-0" aria-label="Telegram">
+          <img src="tg.png" alt="Telegram" class="w-full h-full object-cover" />
+        </a>
+        <a href="https://x.com/CATON_pump" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden ring-1 ring-gold-400/70 hover:scale-110 transition bg-black shrink-0" aria-label="X / Twitter">
+          <img src="x.png" alt="X" class="w-full h-full object-cover" />
+        </a>
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-buy hidden sm:inline-flex items-center h-10 px-5 rounded-md font-condensed font-bold tracking-[0.16em] text-navy-950 text-sm">
+          BUY NOW
+        </a>
+        <button id="menuBtn" class="md:hidden w-9 h-9 sm:w-10 sm:h-10 grid place-items-center text-gold-300 overflow-hidden shrink-0" aria-label="Open menu">
+          <svg viewBox="0 0 22 22" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 hidden bg-navy-950/95 pt-24 px-6">
+    <div class="flex flex-col gap-6 font-condensed text-3xl tracking-wide text-gold-200">
+      <a href="#about" class="menu-link">About</a>
+      <a href="#howto" class="menu-link">How to Buy</a>
+      <a href="#chart" class="menu-link">Chart</a>
+      <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-buy inline-flex w-max items-center h-12 px-6 rounded-md font-bold tracking-[0.16em] text-navy-950 text-lg">BUY NOW</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="top" class="relative lg:min-h-screen pt-[78px] overflow-hidden">
+    <img src="banner.png" alt="CATON PD banner" id="heroBg" class="absolute inset-0 w-full h-full object-cover object-center scale-105 will-change-transform" />
+    <div class="absolute inset-0 bg-gradient-to-r from-navy-950/90 via-navy-950/55 to-navy-950/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent"></div>
+    <div class="hero-lights absolute inset-0"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-10 sm:py-16 lg:py-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-10 items-center lg:min-h-[calc(100vh-78px)]">
+      <div>
+        <div class="reveal d1 inline-flex items-center gap-3 px-3 py-1.5 rounded-full border border-gold-400/30 bg-navy-950/50 font-mono text-[11px] tracking-[0.22em] text-gold-300">
+          <span class="w-2 h-2 rounded-full bg-baton-500 pulse-dot"></span>
+          CATON PD // STATUS: ON PATROL
+        </div>
+
+        <h1 class="reveal d2 mt-6 font-display text-[18vw] sm:text-8xl lg:text-9xl leading-[0.85] gold-stroke text-white">
+          CATON
+        </h1>
+        <div class="reveal d2 flex flex-wrap items-center gap-3 mt-3">
+          <span class="font-condensed text-2xl tracking-[0.35em] text-gold-400">$CATON</span>
+          <span class="h-4 w-px bg-gold-400/40"></span>
+          <span class="font-mono text-xs tracking-[0.2em] text-white/70">SOLANA MEME FORCE</span>
+        </div>
+
+        <p class="reveal d3 mt-6 max-w-xl text-lg sm:text-xl text-white/90 leading-relaxed">
+          CATON is Solana’s toughest police cat, patrolling the blockchain and chasing scams with style.
+        </p>
+
+        <!-- CA copy -->
+        <div class="reveal d4 mt-8 hud-card rounded-lg p-3 sm:p-4 max-w-xl">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="min-w-0">
+              <div class="font-mono text-[10px] tracking-[0.28em] text-gold-400">CONTRACT ADDRESS</div>
+              <div id="caDisplay" class="font-mono text-sm sm:text-base text-white break-all">TBA</div>
+            </div>
+            <button id="copyBtn" class="shrink-0 h-11 w-full sm:w-auto px-4 rounded-md bg-gold-400 text-navy-950 font-condensed font-bold tracking-[0.18em] text-sm hover:bg-gold-300 transition">
+              COPY CA
+            </button>
+          </div>
+        </div>
+
+        <div class="reveal d5 mt-6 flex flex-wrap items-center gap-3">
+          <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-buy inline-flex items-center justify-center h-14 px-8 rounded-md font-condensed font-extrabold tracking-[0.2em] text-lg text-navy-950">
+            BUY NOW
+          </a>
+          <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn-chart inline-flex items-center justify-center h-14 px-8 rounded-md font-condensed font-extrabold tracking-[0.2em] text-lg">
+            CHART
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal d4 relative mx-auto w-[220px] sm:w-[340px] lg:w-[400px] mb-6">
+        <div class="siren-ring absolute -inset-2 rounded-full blur-[2px]"></div>
+        <div class="relative rounded-full p-1.5 bg-navy-950">
+          <img src="logo.png" alt="Officer CATON" class="w-full aspect-square rounded-full object-cover object-center ring-4 ring-gold-400/80" />
+        </div>
+        <img src="badge.jpg" alt="" class="absolute -bottom-3 -right-1 sm:-bottom-4 sm:-right-2 w-16 h-16 sm:w-24 sm:h-24 rounded-full object-cover object-center ring-2 ring-gold-400 shadow-2xl" />
+        <div class="stamp absolute left-0 sm:-left-6 top-6 sm:top-8 px-3 py-1 font-display text-[11px] bg-navy-950/70">ON DUTY</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISPATCH TICKER -->
+  <div class="relative z-10 border-y border-gold-400/20 bg-navy-900">
+    <div class="tape"></div>
+    <div class="overflow-hidden py-3 font-mono text-sm text-gold-300 tracking-[0.18em]">
+      <div class="marquee-track">
+        <span class="px-8">10-4 DISPATCH — OFFICER CATON IS ROLLING — $CATON ON SOLANA — SCAMMERS YOU HAVE THE RIGHT TO REMAIN RUGGED — BADGE ON BATON UP — JOIN THE FORCE — CATON PD PATROLLING THE CHAIN — BUY $CATON — ZERO MERCY FOR RUGS —</span>
+        <span class="px-8">10-4 DISPATCH — OFFICER CATON IS ROLLING — $CATON ON SOLANA — SCAMMERS YOU HAVE THE RIGHT TO REMAIN RUGGED — BADGE ON BATON UP — JOIN THE FORCE — CATON PD PATROLLING THE CHAIN — BUY $CATON — ZERO MERCY FOR RUGS —</span>
+      </div>
+    </div>
+    <div class="tape"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="relative bg-city py-24 crosswalk">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-end justify-between gap-4 mb-12">
+        <div>
+          <div class="font-mono text-xs tracking-[0.35em] text-gold-400">// 01  BRIEFING</div>
+          <h2 class="font-oswald text-5xl sm:text-6xl uppercase mt-2 text-white">Meet the Officer</h2>
+        </div>
+        <img src="badge.jpg" alt="" class="hidden sm:block w-16 h-16 rounded-full object-cover opacity-90" />
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+        <div class="hud-card rounded-xl p-2 overflow-hidden">
+          <img src="officer.jpg" alt="Officer CATON portrait" class="w-full h-full object-cover object-top rounded-lg min-h-[420px]" />
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <div class="hud-card rounded-xl p-6 sm:p-8">
+            <div class="font-condensed text-gold-400 tracking-[0.25em] text-sm">CASE FILE // CATON</div>
+            <h3 class="font-oswald text-3xl mt-2 uppercase">Solana’s toughest police cat</h3>
+            <p class="mt-4 text-white/80 leading-relaxed text-lg">
+              CATON is Solana’s toughest police cat, patrolling the blockchain and chasing scams with style.
+              When a rug tries to run, CATON PD rolls. Night shift. Wet streets. Red and blue on the asphalt.
+              He doesn’t do warnings — he does baton-first community service.
+            </p>
+            <p class="mt-4 text-white/70 leading-relaxed">
+              Born for the beat and built for the chain, Officer CATON keeps the precinct loud, the badge polished,
+              and the memes in lockup. This is not a quiet cat. This is a pursuit.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="hud-card rounded-xl p-5">
+              <div class="font-mono text-[10px] tracking-[0.25em] text-gold-400">NAME</div>
+              <div class="font-oswald text-2xl mt-1">CATON</div>
+            </div>
+            <div class="hud-card rounded-xl p-5">
+              <div class="font-mono text-[10px] tracking-[0.25em] text-gold-400">SYMBOL</div>
+              <div class="font-oswald text-2xl mt-1">$CATON</div>
+            </div>
+            <div class="hud-card rounded-xl p-5">
+              <div class="font-mono text-[10px] tracking-[0.25em] text-gold-400">NETWORK</div>
+              <div class="font-oswald text-2xl mt-1">SOLANA</div>
+            </div>
+            <div class="hud-card rounded-xl p-5">
+              <div class="font-mono text-[10px] tracking-[0.25em] text-gold-400">STATUS</div>
+              <div class="font-oswald text-2xl mt-1 text-baton-400">ON PATROL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 mt-8">
+        <article class="hud-card rounded-xl p-6">
+          <div class="font-condensed tracking-[0.2em] text-gold-400 text-sm">01 — PATROL</div>
+          <h3 class="font-oswald text-2xl mt-2 uppercase">Chain watch</h3>
+          <p class="mt-2 text-white/70">24/7 beat on Solana. CATON walks the blocks so you don’t have to trust the shadows.</p>
+        </article>
+        <article class="hud-card rounded-xl p-6">
+          <div class="font-condensed tracking-[0.2em] text-gold-400 text-sm">02 — PURSUIT</div>
+          <h3 class="font-oswald text-2xl mt-2 uppercase">Scam chase</h3>
+          <p class="mt-2 text-white/70">Rugs, copycats, fake CAs — if it runs, the baton comes out. Style is non-negotiable.</p>
+        </article>
+        <article class="hud-card rounded-xl p-6">
+          <div class="font-condensed tracking-[0.2em] text-gold-400 text-sm">03 — PRECINCT</div>
+          <h3 class="font-oswald text-2xl mt-2 uppercase">Community force</h3>
+          <p class="mt-2 text-white/70">Holders ride shotgun. Telegram is the radio. X is the bulletin board. Buy in, suit up.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO BUY -->
+  <section id="howto" class="relative py-24 bg-navy-900">
+    <div class="absolute inset-x-0 top-0 tape"></div>
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="mb-12">
+        <div class="font-mono text-xs tracking-[0.35em] text-gold-400">// 02  INTAKE PROCEDURE</div>
+        <h2 class="font-oswald text-5xl sm:text-6xl uppercase mt-2 text-white">How to Buy $CATON</h2>
+        <p class="mt-4 max-w-2xl text-white/70 text-lg">Four steps. One badge. You’re buying $CATON on Solana — keep it official, keep it CATON PD.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <article class="hud-card rounded-xl p-6 flex flex-col">
+          <div class="flex items-center justify-between">
+            <div class="step-num w-12 h-12 rounded-full grid place-items-center font-display text-xl">1</div>
+            <svg class="text-gold-400" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="11" width="18" height="13" rx="2"/><path d="M9 11V8a5 5 0 0 1 10 0v3"/></svg>
+          </div>
+          <h3 class="font-oswald text-2xl uppercase mt-5">Get a Solana wallet</h3>
+          <p class="mt-3 text-white/70 leading-relaxed flex-1">
+            Install <a class="text-gold-300 underline underline-offset-2" href="https://phantom.app" target="_blank" rel="noopener noreferrer">Phantom</a>
+            or <a class="text-gold-300 underline underline-offset-2" href="https://solflare.com" target="_blank" rel="noopener noreferrer">Solflare</a>.
+            That’s your badge. Create it, back it up, and never share the seed. CATON PD doesn’t do impersonators.
+          </p>
+          <div class="mt-5 font-mono text-[11px] tracking-[0.2em] text-baton-400">STEP 01 // CREDENTIALS</div>
+        </article>
+
+        <article class="hud-card rounded-xl p-6 flex flex-col">
+          <div class="flex items-center justify-between">
+            <div class="step-num w-12 h-12 rounded-full grid place-items-center font-display text-xl">2</div>
+            <svg class="text-gold-400" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="14" cy="14" r="10"/><path d="M14 8v8M10 12h8"/></svg>
+          </div>
+          <h3 class="font-oswald text-2xl uppercase mt-5">Load SOL</h3>
+          <p class="mt-3 text-white/70 leading-relaxed flex-1">
+            Buy SOL on an exchange or inside your wallet, then send it to your Solana address.
+            Keep a little extra SOL in the holster for network fees so the swap doesn’t stall mid-pursuit.
+          </p>
+          <div class="mt-5 font-mono text-[11px] tracking-[0.2em] text-baton-400">STEP 02 // ARMORY</div>
+        </article>
+
+        <article class="hud-card rounded-xl p-6 flex flex-col">
+          <div class="flex items-center justify-between">
+            <div class="step-num w-12 h-12 rounded-full grid place-items-center font-display text-xl">3</div>
+            <svg class="text-gold-400" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 14h12M16 10l4 4-4 4"/><rect x="4" y="5" width="20" height="18" rx="3"/></svg>
+          </div>
+          <h3 class="font-oswald text-2xl uppercase mt-5">Open the official swap</h3>
+          <p class="mt-3 text-white/70 leading-relaxed flex-1">
+            Hit <span class="text-gold-300">Buy Now</span> to open Pump.fun with SOL in and $CATON out.
+            Connect the wallet. Verify the CA on this site before you confirm — fake links get the baton.
+          </p>
+          <div class="mt-5 font-mono text-[11px] tracking-[0.2em] text-baton-400">STEP 03 // PRECINCT</div>
+        </article>
+
+        <article class="hud-card rounded-xl p-6 flex flex-col">
+          <div class="flex items-center justify-between">
+            <div class="step-num w-12 h-12 rounded-full grid place-items-center font-display text-xl">4</div>
+            <svg class="text-gold-400" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 3l3 7h7l-5.5 4.2L21 22l-7-4.5L7 22l2.5-7.8L4 10h7z"/></svg>
+          </div>
+          <h3 class="font-oswald text-2xl uppercase mt-5">Swap SOL for $CATON</h3>
+          <p class="mt-3 text-white/70 leading-relaxed flex-1">
+            Enter the amount, confirm the transaction, and you’re on the force.
+            Badge issued. You’re holding $CATON — Solana’s toughest police cat just rode in with you.
+          </p>
+          <div class="mt-5 font-mono text-[11px] tracking-[0.2em] text-baton-400">STEP 04 // BADGE ISSUED</div>
+        </article>
+      </div>
+
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-buy inline-flex items-center h-14 px-8 rounded-md font-condensed font-extrabold tracking-[0.2em] text-lg text-navy-950">BUY NOW</a>
+        <button type="button" id="copyBtn2" class="h-14 px-6 rounded-md border border-gold-400/50 text-gold-300 font-condensed font-bold tracking-[0.18em] hover:bg-gold-400/10 transition">COPY CA</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHART -->
+  <section id="chart" class="relative py-24 bg-city">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+        <div>
+          <div class="font-mono text-xs tracking-[0.35em] text-gold-400">// 03  RADAR</div>
+          <h2 class="font-oswald text-5xl sm:text-6xl uppercase mt-2 text-white">Live Chart</h2>
+          <p class="mt-3 text-white/70 max-w-xl">Dexscreener radar for $CATON. Watch the pursuit in real time — then jump back in with Buy Now.</p>
+        </div>
+        <a href="https://dexscreener.com/solana/TBA" target="_blank" rel="noopener noreferrer" class="btn-chart inline-flex items-center h-12 px-6 rounded-md font-condensed font-extrabold tracking-[0.18em]">OPEN CHART</a>
+      </div>
+
+      <div class="hud-card rounded-xl p-2 sm:p-3">
+        <div class="flex items-center justify-between px-3 py-2 font-mono text-[11px] tracking-[0.2em] text-gold-400">
+          <span>CATON PD // MARKET RADAR</span>
+          <span class="flex items-center gap-2 text-baton-400"><span class="w-2 h-2 rounded-full bg-baton-500 pulse-dot"></span> LIVE</span>
+        </div>
+        <div id="dexscreener-embed" class="rounded-lg overflow-hidden bg-navy-950">
+          <iframe
+            title="Dexscreener CATON chart"
+            src="https://dexscreener.com/solana/TBA?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"
+            allow="clipboard-write"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="relative py-24 bg-navy-900">
+    <div class="absolute inset-x-0 top-0 tape"></div>
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="hud-card rounded-2xl p-8 sm:p-12 overflow-hidden relative">
+        <div class="hero-lights absolute inset-0 opacity-40"></div>
+        <div class="relative grid lg:grid-cols-[1fr_auto] gap-10 items-center">
+          <div>
+            <div class="font-mono text-xs tracking-[0.35em] text-gold-400">// 04  JOIN THE FORCE</div>
+            <h2 class="font-oswald text-5xl uppercase mt-2">Report to the precinct</h2>
+            <p class="mt-4 text-lg text-white/75 max-w-2xl">
+              Radio’s open. CATON is Solana’s toughest police cat, patrolling the blockchain and chasing scams with style.
+              Grab $CATON, hop in Telegram, and keep eyes on X.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="https://swap.pump.fun/?input=So11111111111111111111111111111111111111112&output=TBA" target="_blank" rel="noopener noreferrer" class="btn-buy inline-flex items-center h-14 px-8 rounded-md font-condensed font-extrabold tracking-[0.2em] text-lg text-navy-950">BUY NOW</a>
+              <a href="https://t.me/CATON_pump" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 h-14 px-5 rounded-md bg-[#2AABEE] text-white font-condensed font-bold tracking-[0.14em] text-lg hover:brightness-110">
+                <img src="tg.png" alt="" class="w-8 h-8 rounded-full" /> TELEGRAM
+              </a>
+              <a href="https://x.com/CATON_pump" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 h-14 px-5 rounded-md bg-black ring-1 ring-gold-400/60 font-condensed font-bold tracking-[0.14em] text-lg">
+                <img src="x.png" alt="" class="w-8 h-8 rounded-md" /> TWITTER
+              </a>
+            </div>
+          </div>
+          <img src="logo.png" alt="CATON" class="w-40 h-40 sm:w-52 sm:h-52 rounded-full object-cover ring-4 ring-gold-400 justify-self-center" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="relative bg-navy-950 border-t border-gold-400/20">
+    <div class="tape"></div>
+    <div class="max-w-7xl mx-auto px-4 py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="CATON" class="w-12 h-12 rounded-full object-cover ring-2 ring-gold-400" />
+        <div>
+          <div class="font-display text-xl">CATON</div>
+          <div class="font-mono text-[10px] tracking-[0.25em] text-gold-400">$CATON // CATON PD</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://t.me/CATON_pump" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full overflow-hidden ring-1 ring-white/20">
+          <img src="tg.png" alt="Telegram" class="w-full h-full object-cover" />
+        </a>
+        <a href="https://x.com/CATON_pump" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-xl overflow-hidden ring-1 ring-gold-400/70 bg-black">
+          <img src="x.png" alt="X" class="w-full h-full object-cover" />
+        </a>
+      </div>
+    </div>
+    <p class="px-4 pb-10 text-center font-mono text-[11px] leading-relaxed text-white/40 max-w-3xl mx-auto">
+      $CATON is a meme coin on Solana. Not financial advice. Crypto is volatile — do your own research,
+      verify the contract, and never buy from unofficial links. CATON PD chases scams. Don’t become one.
+    </p>
+  </footer>
+
+  <!-- toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] hidden px-5 py-3 rounded-md bg-gold-400 text-navy-950 font-condensed font-bold tracking-[0.18em] shadow-2xl">
+    CA COPIED // 10-4
+  </div>
+
+  <script>
+    const CA = "TBA";
+    const copyBtns = [document.getElementById("copyBtn"), document.getElementById("copyBtn2")];
+    const toast = document.getElementById("toast");
+    const caDisplay = document.getElementById("caDisplay");
+
+    function shortCa(ca) {
+      if (!ca || ca.length < 16) return ca;
+      return ca.slice(0, 6) + "..." + ca.slice(-6);
+    }
+    caDisplay.textContent = shortCa(CA);
+
+    async function copyCa() {
+      try {
+        await navigator.clipboard.writeText(CA);
+      } catch (e) {
+        const el = document.createElement("textarea");
+        el.value = CA;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        el.remove();
+      }
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 1800);
+    }
+    copyBtns.forEach((btn) => btn && btn.addEventListener("click", copyCa));
+
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+    document.querySelectorAll(".menu-link").forEach((a) =>
+      a.addEventListener("click", () => mobileMenu.classList.add("hidden"))
+    );
+
+    const heroBg = document.getElementById("heroBg");
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY;
+      if (heroBg) heroBg.style.transform = "translateY(" + y * 0.22 + "px) scale(1.08)";
+    }, { passive: true });
+  </script>
+</body>
+</html>
